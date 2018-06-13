@@ -1,0 +1,3 @@
+class DirectoriesController < ApplicationController
+
+end
