@@ -6,6 +6,25 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
+    <nav>
+      <% if logged_in? %>
+
+        <a href="/bookmarks/new"> Create Bookmark </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
+
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
+
+    </nav>
+    <div class="container">
+      <h1>Bookmarker</h1>
+      <%= yield %>
+
+
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
