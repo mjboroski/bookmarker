@@ -56,7 +56,24 @@ class BookmarksController < ApplicationController
   end
 
   patch '/bookmarks/:id' do
-
+    if logged_in?
+      if params[:content] == ""
+        redirect to "/bookmarks/#{params[:id]}/edit"
+      else
+        @bookmark = Bookmark.find_by_id(params[:id])
+        if @bookmark && @bookmark.user == current_user
+          if @bookmark.update(content: params[:content])
+            redirect to "/bookmarks/#{@bookmark.id}"
+          else
+            redirect to "/bookmarks/#{@bookmark.id}/edit"
+          end
+        else
+          redirect to '/bookmarks'
+        end
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   delete '/bookmarks/:id/delete' do
