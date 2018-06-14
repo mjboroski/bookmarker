@@ -3,6 +3,6 @@
 
 <% @bookmarks.each do |bookmark| %>
   <div>
-    <%= bookmark.content %>
+    <%= bookmark.title bookmark.link bookmark.category %>
   </div>
 <% end %>

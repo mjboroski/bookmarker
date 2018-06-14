@@ -1,4 +1,4 @@
-<p><%= @bookmark.content %>
+<p><%= @bookmark.title @bookmark.link @bookmark.category %>
 
 <form method="post" action="/bookmarks/<%=@bookmark.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

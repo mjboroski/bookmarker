@@ -21,7 +21,7 @@ class BookmarksController < ApplicationController
       if params[:content] == ""
         redirect to "/bookmarks/new"
       else
-        @bookmark = current_user.bookmarks.build(content: params[:content])
+        @bookmark = current_user.bookmarks.build(title: params[:title], link: params[:link], category: params[:category])
         if @bookmark.save
           redirect to "/bookmarks/#{@bookmark.id}"
         else
@@ -57,12 +57,12 @@ class BookmarksController < ApplicationController
 
   patch '/bookmarks/:id' do
     if logged_in?
-      if params[:content] == ""
+      if params[:link] == ""
         redirect to "/bookmarks/#{params[:id]}/edit"
       else
         @bookmark = Bookmark.find_by_id(params[:id])
         if @bookmark && @bookmark.user == current_user
-          if @bookmark.update(content: params[:content])
+          if @bookmark.update(title: params[:title], link: params[:link], category: params[:category])
             redirect to "/bookmarks/#{@bookmark.id}"
           else
             redirect to "/bookmarks/#{@bookmark.id}/edit"
