@@ -8,5 +8,4 @@ use Rack::MethodOverride
 
 use BookmarksController
 use UsersController
-use DirectoriesController
 run ApplicationController

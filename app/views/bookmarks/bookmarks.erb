@@ -1,8 +1,11 @@
-<p> Welcome <%= current_user.username %>
+<p> Welcome, <%= current_user.username %>!
 <h2> Bookmarks </h2>
 
 <% @bookmarks.each do |bookmark| %>
   <div>
-    <%= bookmark.title bookmark.link bookmark.category %>
+    <%= bookmark.title %> <br>
+    <%= bookmark.link %> <br>
+    <%= bookmark.category %><br>
+    <a href="/bookmarks/<%= bookmark.id %>">Options</a><br><br>
   </div>
 <% end %>

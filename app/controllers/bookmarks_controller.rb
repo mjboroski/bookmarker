@@ -18,7 +18,7 @@ class BookmarksController < ApplicationController
 
   post '/bookmarks' do
     if logged_in?
-      if params[:content] == ""
+      if params[:link] == ""
         redirect to "/bookmarks/new"
       else
         @bookmark = current_user.bookmarks.build(title: params[:title], link: params[:link], category: params[:category])
