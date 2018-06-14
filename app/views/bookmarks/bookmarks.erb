@@ -1,0 +1,8 @@
+<p> Welcome <%= current_user.username %>
+<h2> Bookmarks </h2>
+
+<% @bookmarks.each do |bookmark| %>
+  <div>
+    <%= bookmark.content %>
+  </div>
+<% end %>

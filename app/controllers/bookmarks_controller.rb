@@ -1,6 +1,11 @@
 class BookmarksController < ApplicationController
   get '/bookmarks' do
-
+    if logged_in?
+      @bookmarks = Bookmark.all
+      erb :'bookmarks/bookmarks'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/bookmarks/new' do
