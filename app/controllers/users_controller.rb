@@ -24,12 +24,30 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-  end
+      if !logged_in?
+        erb :'users/login'
+      else
+        redirect '/bookmarks'
+      end
+    end
 
-  post '/login' do
-  end
+    post '/login' do
+      user = User.find_by(:username => params[:username])
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/bookmarks"
+      else
+        redirect to '/signup'
+      end
+    end
 
-  get '/logout' do
-  end
+    get '/logout' do
+      if logged_in?
+        session.destroy
+        redirect to '/login'
+      else
+        redirect to '/'
+      end
+    end
 
 end
