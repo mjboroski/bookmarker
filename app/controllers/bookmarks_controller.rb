@@ -9,11 +9,28 @@ class BookmarksController < ApplicationController
   end
 
   get '/bookmarks/new' do
-
+    if logged_in?
+      erb :'bookmarks/create_bookmark'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/bookmarks' do
-
+    if logged_in?
+      if params[:content] == ""
+        redirect to "/bookmarks/new"
+      else
+        @bookmark = current_user.bookmarks.build(content: params[:content])
+        if @bookmark.save
+          redirect to "/bookmarks/#{@bookmark.id}"
+        else
+          redirect to "/bookmarks/new"
+        end
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   get '/bookmarks/:id' do
