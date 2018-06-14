@@ -77,6 +77,15 @@ class BookmarksController < ApplicationController
   end
 
   delete '/bookmarks/:id/delete' do
+    if logged_in?
+      @bookmark = Bookmark.find_by_id(params[:id])
+      if @bookmark && @bookmark.user == current_user
+        @bookmark.delete
+      end
+      redirect to '/bookmarks'
+    else
+      redirect to '/login'
+    end
   end
 
 end
