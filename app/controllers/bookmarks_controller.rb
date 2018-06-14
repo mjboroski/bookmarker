@@ -34,7 +34,12 @@ class BookmarksController < ApplicationController
   end
 
   get '/bookmarks/:id' do
-
+    if logged_in?
+      @bookmark = Bookmark.find_by_id(params[:id])
+      erb :'bookmarks/show_bookmark'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/bookmarks/:id/edit' do
